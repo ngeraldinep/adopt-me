@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+            integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+            crossorigin="anonymous">
+        </script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="sucursales">
+            <p>Palermo&#128204;<a href="https://goo.gl/maps/K1Cadg89iZa2vNhWA"> Paraguay 4501</a></p>   
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1642.38543147638!2d-58.42536834190126!3d-34.58466399511613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDM1JzA0LjgiUyA1OMKwMjUnMjcuNCJX!5e0!3m2!1ses-419!2sar!4v1619712259033!5m2!1ses-419!2sar"><width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div> 
+        <div class="sucursales">    
+            <p>Colegiales&#128204;<a href="https://goo.gl/maps/1mjTGVYcAWZqFMBt6"> Maure 3297</a></p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.970575322344!2d-58.45066088477094!3d-34.57961108046579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDM0JzQ2LjYiUyA1OMKwMjYnNTQuNSJX!5e0!3m2!1ses-419!2sar!4v1619714680274!5m2!1ses-419!2sar"><width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <div style="text-align: center; font-family: 'Berkshire Swash', cursive; font-family: 'Rouge Script', cursive; font-size: 1.9em; font-weight: bold;">
+            <u>Nuestros horarios:</u>
+            <p>Lunes a Viernes de 10 a 19 hs.
+            <p>Sábados, domingos y feriados de 11 a 18hs.</p>
+
+            <u>Reservas:</u>
+            <p>Telefono: 0303-456</p>
+            <p>E-mail: dulceysano@gmail.com</p>
+        </div>  
+    </body>
+    <a  class="btn"href="{% url 'home' %}" style="color: darkgoldenrod;"><i class="fa fa-arrow-circle-up fa-3x"></i></a>
+
+</html>
+
+{% endblock %}

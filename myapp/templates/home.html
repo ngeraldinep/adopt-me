@@ -4,128 +4,99 @@
 
 {% block content %}
 
-<form method="post">
-    {% csrf_token %}
-    {{sss.as_p}}
-    <button>
-        Save
-    </button>    
-</form>
-
 <!DOCTYPE html>
 <html>
     <body>
-        <br>
-        <div class="container">
-            <h2 style="color: white;"></h2>  
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-              <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                    <li data-target="#myCarousel" data-slide-to="3"></li>
-                    <li data-target="#myCarousel" data-slide-to="4"></li>
-                </ol>
-          
-              <!-- Wrapper for slides -->
-                <div class="carousel-inner" style="margin: 0 auto;">
-                        <div class="carousel-item active" >
-                            <a href="cursoscapacitaciones.html">
-                            <img class="carouselimg" src="{% static '/home-img/adiestramiento-solopatita.jpeg' %}" alt="torta" width="800px" height="400px" ></a>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="carouselimg" src="{% static '/home-img/primeros-aux.jpg' %}" alt="macaroons" width="800px" height="400px">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="carouselimg" src="{% static '/cursosycapacitaciones-img/gatoperro.jpg' %}" alt="roll" width="800px" height="400px">
-                        </div>    
-                        <div class="carousel-item">
-                            <img class="carouselimg" src="{% static '/cursosycapacitaciones-img/primera-mascota.jpg' %}" alt="veggie-sandwich" width="800px" height="400px" >
-                        </div>
-                        <div class="carousel-item">
-                            <img class="carouselimg" src="{% static '/home-img/lazarillo.png' %}" alt="kids-cupcake" width="800px" height="400px" >
-                        </div>
+        {% if messages %}
+        <div >
+            <ul class="messages" style="text-align: center; padding: 10px; border: 2px solid rgb(175, 36, 36); background-color: #3cb90b; margin-top: 20xp;">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="font-size: 40px; font-weight: bold;">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div style="max-width:2000px;margin-top:46px; ">
+            <div class="carrouselDeFotos" style="height: 60vh; width: 100% ">
+                <img src="{% static '/home-img/callejeros.jpg' %}" style="width:100%; height: 100% !important;object-fit: cover;">
+            </div>
+            <div class="carrouselDeFotos" style="height: 60vh; width: 100% !important">
+                <img src="{% static '/home-img/gatosolo.jpg' %}" style="width:100%;height: 100% !important; object-fit: cover;">
+            </div>
+            <div class="carrouselDeFotos" style="height: 60vh; width: 100%">
+                <img src="{% static '/home-img/adiestramiento-patita.jpg' %}" style="width:100% ; height: 100% !important; object-fit: cover;">
+            </div>
+        </div>
+        <script>
+            // script para que el carrousel se mueva de forma automatica cada 4 segundos
+            var myIndex = 0;
+            carousel();
+            
+            function carousel() {
+              var i;
+              var x = document.getElementsByClassName("carrouselDeFotos");
+              for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";  
+              }
+              myIndex++;
+              if (myIndex > x.length) {myIndex = 1}    
+              x[myIndex-1].style.display = "block";  
+              setTimeout(carousel, 4000);    
+            }
+        </script>        
+        <div class="corte-pagina" style="background-color: #fcf8f3">  
+                <div>
+                    <label>
+                        <h3>Dona hoy! salva una vida</h3>
+                    </label>
+
+                    <div>
+                        <label for="donar-unavez" class="my-1 mt-0">
+                            <input x-on:click="selected = 'opt1'" id="unavez" type="radio" name="plan" value="donar1" checked>
+                            Donar una vez $2000
+                        </label>
+                        <br>
+
+                        <label for="donar-mensual" class="my-1">
+                            <input x-on:click="selected = 'opt2'" id="mensual" type="radio" name="plan" value="donarmes">
+                            Donar mensual - <strong>$5000</strong>
+                        </label>
+                        <br>
+                        <label for="donar-anual" class="my-1 mb-0">
+                            <input x-on:click="selected = 'opt3'" id="anual" type="radio" name="plan" value="donaranio">
+                            Donar anualmente - <strong>$60000</strong><span class="text-green-500"></span>
+                        </label>
+                    </div>
                 </div>
-          
-              <!-- Left and right controls -->
+                <div x-show="selected !== 'opt1'" x-cloak></div>
 
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev" role="button" style="background:none !important; visibility: visible;">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                        <span class="sr-only">Previous</span> 
-                </a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next" role="button" style="background:none !important; visibility: visible;">
-                        <span class="glyphicon glyphicon-chevron-right" ></span>
-                        <span class="sr-only">Next</span>
-                </a>
+                <div style="padding: 2em;">
+                    <a href="{% url 'donacionpago' %}"> 
+                        <button id="card-button" type="button" class="submit-button">Donar</button>
+                    </a>
+                </div>
+            </form>
+        </div>    
+        <div class="corte-pagina">
+            <div style="padding: 3em " id="contacto-sugerencia">
+                <h3 class="centrar-texto">Contactanos</h3>
+                <hr>
+                <p>Envianos tu pregunta o sugerencia</p>
+    
+                <div class="container_formularios" style="margin:1em;">
+                    <form method="post" style="width: 100px; margin: 0; margin-top: 10px; text-align: center;">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" style="margin-top: 10px;">Enviar</button>
+                    </form>
+                </div><br>
             </div>
+        </div>    
+        <div>
+                <img src="{% static '/home-img/paseo-perros.jpg' %}" style="filter: grayscale(50%); object-fit: cover; width:100%; height:100%;" >
         </div>
-        <div class="donaciones">          
-            <h2 ><b>Dona hoy, salva una vida!</b></h2>
-
-            <div class="mediosDePago">
-                <a href="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"><img src="{% static '/home-img/Mercadopago.jpg' %}"
-                data-preference-id="1273324264-f92cada3-65b7-4a53-a55b-af7cfb015eb6" data-source="button" 
-                alt="Mercadopago" width="120" height="100px"></a>
-                
-               
-                
-                <img src="{% static '/home-img/cafecito logo.png' %}" alt="cafecito" width="120px" height="100px">
-                <img src="{% static '/home-img/transf-bancaria logo.png' %}" alt="transf-bancaria" width="120px" height="100px">
-
-            </div>
-
-            <h3>
-                <b>Incribite a nuestro voluntariado</b>
-            </h3>
-            <h4>
-                <b>Llena el formulario y se parte de nuestra familia <br>
-                    
-                </b>     
-                <a href="sucursales.html"><b>¿Donde estamos?</b></a>
-            </h4>
-            <h4>
-                <b>Veni a visitarnos </b>
-            </h4>
-            <h4>
-                <b>Solicita una visita para vos y tu colegio<br>
-                    Podés venir a conocer el refugio y aprender
-                </b>    
-                <a href="productos.html"><b>aca!</b></a>
-            </h4>   
-            <h4>
-                <b><u>Aprende a cuidar a tu primera mascota</u></b>
-            </h4>             
-        
-
-        
-        
-        </div>
-        <h2>Consultas o Reclamos</h2>
-        
-        
-        
-        <form method="post">
-            {% csrf_token %}
-            {{ sss.as_p }}
-            <button type="submit">Enviar</button>
-        </form>
-        
-        <a  class="btn"href="{% url 'home' %}" style="color: darkgoldenrod;"><i class="fa fa-arrow-circle-up fa-3x"></i></a>    
-
     </body>
-<!--     <footer>
-        <div class="footer">
-            <p>Adopt-Me &reg;</p>
-            <a href="https://instagram.com"><img src="instagram.png" height="40px" width="40px" alt="instagram"></a>
-            <a href="https://facebook.com"><img src="facebook.png" height="40px" width="40px" alt="facebook"></a>
-            <a href="https://twitter.com"><img src="twitter.png" height="40px" width="40px" alt="twitter"></a>
-            <a href="https://linkedin.com"><img src="linkedin.png" height="40px" width="40px" alt="linkedin"></a>
-               
-        </div>
-        
-    </footer> -->
-
 </html>
 
 {% endblock %}

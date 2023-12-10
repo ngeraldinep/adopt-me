@@ -11,8 +11,6 @@ header {
   width: 100%;
   text-align:center;
   font-family: 'Fantasy' ;
-  /*font-family: 'Berkshire Swash', cursive;
-  font-family: 'Rouge Script', cursive;*/
   display: inline-block;
 }
 
@@ -46,8 +44,6 @@ header {
   nav ul li {
   float:left;
   font-family: 'Fantasy';
-  /*font-family: 'Berkshire Swash', cursive;
-  font-family: 'Rouge Script', cursive;*/
   font-size-adjust: inherit;
   font-weight: bold;
   font-size:1.3em;
@@ -83,58 +79,10 @@ header {
   clear:both;
 }
 
-.sucursales {
-  font-family: 'Amita', cursive;
-  font-family: 'Berkshire Swash', cursive;
-  font-family: 'Rouge Script', cursive;
-  font-size: 1.3em;
-  font-weight: bold;
-  margin: 1em;
-  margin-bottom: 1.5em;
-  float:left;
-  align-items: center;   
-}
-
-
 .container_formularios {
   margin-top: 5em;
   font-size:1.3em;
   font-family: 'Fantasy';
-  font-family: 'Fantasy';
-  /* font-weight: bold; */
-
-}
-
-section {
-  margin-left:28em;
-  align-items: center;
-  height: max-content;
-  width: max-content;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 4px; 
-}
-
-.column {
-  flex: 25%;
-  max-width: 25%;
-  padding: 0 4px;
-}
-
-.column img {
-  margin-top: 8px;
-  vertical-align: middle;
-  width: 100%;
-}
-.container-fluid {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
 }
 
 @media screen and (max-width: 800px) {
@@ -159,7 +107,6 @@ section {
 
 .historia {
   font-family: 'Fantasy';
-  
   color: white;
   font-size:1.3em;
   font-weight: bold;
@@ -167,8 +114,6 @@ section {
   margin-bottom: 0% !important;
   margin-left: 20%;
   margin-right:20%;
-  
-  
   padding-left: 15px;
   padding-right: 15px;
   padding-top: none;
@@ -188,15 +133,23 @@ section {
   margin-bottom: 0px !important;
 }
 
-@media(max-width: 768px){
-  body {
-    background-size: contain;
-  }
+.body-donacionPago {
+  background-image: url("fondo-donacion.jpg");
+  background-position: center center; 
+  background-repeat: no-repeat;
+  background-size: contain;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
-.donaciones {
+/* .donaciones {
   font-family: 'Fantasy';
-  
   font-size: 1.2em;
   font-weight: bold;
   font-weight: bolder;
@@ -208,49 +161,30 @@ section {
   margin-top: 2em;
   margin-bottom: 2em;
 
-}
+} */
 
 .mediosDePago {
-  
   text-align: center;
   object-position: center;
   align-content:center;
   margin: 5px;
   margin-top: 2em;
   margin-bottom: 2em;
-
 }
 
-/* form 
+form 
 {
   animation:animatezoom 2s}@keyframes animatezoom{from{transform:scale(0)} to{transform:scale(1)}
-
-} */
-
-
-.carousel-inner {
-  margin-left: 0em;
-  display: block;
-  max-width: 100%;
-  height: auto;
-  position:static;
-  line-height: 1;
-  text-align:center !important;
- 
 }
 
-
-
 .zoom{
-
   transition: width 0.18s, height 0.18s, transform 0.5s;
 }
 .zoom:hover{
-
   transform : scale(1.2);
 }
 
-.btn{
+/* .btn{
   display: inline-block;
   position: relative;
   text-decoration: none;
@@ -260,8 +194,8 @@ section {
   border-radius: 50%;
   text-align: center;
   background: #f7f7f7;
-  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.08);
-}
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.08); 
+
 .btn .fa {
   position: absolute;
   content: '';
@@ -285,17 +219,20 @@ section {
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0, 0, 0, 0.19);
   border-bottom: solid 2px #d8d8d8;
 }
+}*/
 
+
+/* Carta giratoria */
 .flip-card {
   background-color: transparent;
   width: 450px;
   height: 300px;
   border: 1px solid #f1f1f1;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  perspective: 1000px; /* No borrar le da el efecto 3D al girar */
   display: inline-block;
 }
 
-/* This container is needed to position the front and back side */
+/* posiciona el front y back de la carta y la centra */
 .flip-card-inner {
   position: relative;
   width: 100%;
@@ -305,48 +242,164 @@ section {
   transform-style: preserve-3d;
 }
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
+/* gira la carta cuando pasas el cursor por encima */
 .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
 }
 
-/* Position the front and back side */
+/* alinea y determina el alto y ancho de la carta */
 .flip-card-front, .flip-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
+  -webkit-backface-visibility: hidden; /* se asegura que siga escondido en cualquier navegador */
   backface-visibility: hidden;
 }
 
-/* Style the front side (fallback if image is missing) */
+/* estilo de la carta de frente */
 .flip-card-front {
   background-color: #bbb;
   color: black;
 }
 
-/* Style the back side */
+/* estilo del back de la carta */
 .flip-card-back {
   background-color: #00806b ;
   color: white;
   transform: rotateY(180deg);
 }
 
+
+/*estilo del boton*/
 .submit-button {
-  background-color: #3498db; /* Color de fondo azul */
-  color: white; /* Color del texto blanco */
-  padding: 15px 30px; /* Relleno del botón */
-  border: none; /* Sin borde */
-  border-radius: 5px; /* Bordes redondeados */
-  cursor: pointer; /* Cursor de puntero al pasar el ratón */
-  font-size: 18px; /* Tamaño del texto */
-  transition: background-color 0.3s; /* Transición suave para el cambio de color de fondo */
-  margin-top: 20px; /* Espacio superior al botón */
-  display: block; /* Hacer que el botón sea un bloque para ajustar el ancho */
-  margin-left: auto; /* Centrar el botón */
-  margin-right: auto; /* Centrar el botón */
+  background-color: #3498db; 
+  color: white; 
+  padding: 15px 30px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  font-size: 18px; 
+  transition: background-color 0.3s; 
+  margin-top: 20px; 
+  display: block; 
+  margin-left: auto; 
+  margin-right: auto; 
 }
 
 .submit-button:hover {
   background-color: #2980b9; /* Cambio de color al pasar el ratón */
 }
+
+.carrouselDeFotos{
+  display: none;
+  height: 75%;
+}
+
+.padding-donacionPago{
+  padding: 3rem !important; 
+  position: relative;
+  
+}
+
+.padding-donacionPago .card {
+  background-color: rgba(255, 255, 255, 0.623); /* Color de fondo con opacidad ajustable */
+  filter: grayscale(10%); /* Ajusta el porcentaje según tus preferencias */
+  border-radius: 25px; /* Ajusta el radio del borde según tus preferencias */
+  padding: 20px; /* Ajusta el padding según tus preferencias */
+}
+
+.padding-donacionPago .form-group label {
+  font-family:Georgia, serif;
+}
+
+.padding-donacionPago #cc-cvc,
+.padding-donacionPago #cc-exp {
+  width: calc(50% - 5px); /* Divide el ancho disponible en dos, restando 5px para el margen entre ellos */
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.form-control:focus {
+ box-shadow: 10px 0px 0px 0px #ffffff !important;
+ border-color: #4ca746;
+}
+
+/* botones del Home y donaciones */
+.custom-button {
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.custom-button:hover {
+  background-color: #45a049; 
+}
+
+.botonVolver {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: #3498db; 
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  transition: background-color 0.3s ease; 
+}
+
+.corte-pagina {
+  background-color: #d6cdcd; 
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 5em;
+}
+
+.formulario-container {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+
+
+.ancho-input {
+  width: 100%;
+}
+
+.w3-large-input {
+  height: 150px;
+}
+
+.custom-button {
+  font-size: 1rem;
+}
+
+.w3-rectangular-input {
+  height: 100px; /* Ajusta la altura según tus preferencias */
+}
+
+.centrar-texto {
+  text-align: center;
+}
+
+textarea.centrar-texto {
+  width: 100%; /* Ajusta el ancho del textarea al 100% */
+  padding: 10px; /* Ajusta el espacio interno según tus preferencias */
+  box-sizing: border-box;
+}
+

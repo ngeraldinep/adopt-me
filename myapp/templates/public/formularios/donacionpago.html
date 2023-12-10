@@ -1,0 +1,197 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+    <!-- <body class="body-historia2" >
+        <br>
+        <br>
+        <br>
+            <div style="background-image: url('/static/donacion.jpg');
+            background-size: 50%;
+            background-position: center;
+            background-attachment: fixed;  
+            background-repeat: no-repeat;
+            height: auto;
+            width: auto; 
+            margin: 0;">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/3.0.0/jquery.payment.min.js">
+                </script>
+                    <div class="padding-donacionPago" style="filter: brightness(100%)">
+                        <div class="row">
+                            <div class="container-fluid d-flex justify-content-center">
+                                <div class="col-sm-8 col-md-6">
+                                    <div class="card" style="font-size: large;">
+                                        <div class="card-header">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <span style="font-family: Georgia, serif;"><h2>Ingrese los datos de su tarjeta</h2></span>
+                                                </div>
+                                                <div class="col-md-6 text-right" style="margin-top: -5px;">
+                                                        <img src="https://img.icons8.com/color/36/000000/visa.png">
+                                                        <img src="https://img.icons8.com/color/36/000000/mastercard.png">
+                                                        <img src="https://img.icons8.com/color/36/000000/amex.png">
+                                                </div>      
+                                            </div>    
+                                        </div>
+                                        <div class="card-body" style="height: 400px">
+                                            <div class="form-group">
+                                                <label for="cc-number" class="control-label">Numeros de la tarjeta</label>
+                                                <input id="cc-number" type="tel" class="input-lg form-control cc-number" autocomplete="cc-number" placeholder="&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull;" required>
+                                            </div>
+                                            <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="cc-exp" class="control-label">Fecha de vencimiento</label>
+                                                    <input id="cc-exp" type="tel" class="input-lg form-control cc-exp" autocomplete="cc-exp" placeholder="&bull;&bull; / &bull;&bull;" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="cc-cvc" class="control-label"> Codigo de seguridad </label>
+                                                    <input id="cc-cvc" type="tel" class="input-lg form-control cc-cvc" autocomplete="off" placeholder="&bull;&bull;&bull;&bull;" required>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="numeric" class="control-label">Nombre de la tarjeta</label>
+                                                <input  type="text" class="input-lg form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <br>
+                                                <input  value="Pagar" type="button" class="custom-button btn-block" style="font-size: .8rem;">
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                    </div> 
+                <script>
+                    $(function($) {
+                        $('[data-numeric]').payment('restrictNumeric');
+                        $('.cc-number').payment('formatCardNumber');
+                        $('.cc-exp').payment('formatCardExpiry');
+                        $('.cc-cvc').payment('formatCardCVC');
+                        $.fn.toggleInputError = function(erred) {
+                        this.parent('.form-group').toggleClass('has-error', erred);
+                        return this;
+                        };
+                        $('form').submit(function(e) {
+                        e.preventDefault();
+                        var cardType = $.payment.cardType($('.cc-number').val());
+                        $('.cc-number').toggleInputError(!$.payment.validateCardNumber($('.cc-number').val()));
+                        $('.cc-exp').toggleInputError(!$.payment.validateCardExpiry($('.cc-exp').payment('cardExpiryVal')));
+                        $('.cc-cvc').toggleInputError(!$.payment.validateCardCVC($('.cc-cvc').val(), cardType));
+                        $('.cc-brand').text(cardType);
+                        $('.validation').removeClass('text-danger text-success');
+                        $('.validation').addClass($('.has-error').length ? 'text-danger' : 'text-success');
+                        });
+                    });
+                </script>
+            </div> 
+
+        <br>
+
+    </body> -->
+
+<!-- NUEVOoooooooooooooooooooooooooooooooooooooooooooooooo -->
+
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/3.0.0/jquery.payment.min.js"></script>
+    </head>
+    
+    <body>
+        <div class="body-donacionPago"><!-- El CCS me rompe el formulario pr alguna razon, si se borra esto se puede ver-->
+            <div class="padding-donacionPago" style="filter: brightness(100%)">
+                <div class="row">
+                    <div class="container-fluid d-flex justify-content-center">
+                        <div class="col-sm-8 col-md-6"> <!--8 de 12 y 6 de 12 para que sea responsive-->
+                            <div class="card" style="font-size: large;">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span style="font-family: Georgia, serif;"><h2>Ingrese los datos de su tarjeta</h2></span>
+                                        </div>
+                                        <div class="col-md-6 text-right" style="margin-top: -5px;">
+                                            <img src="{% static '/donaciones-img/logovisa.png' %}" style="width: 1cm; height: 0.8cm; object-fit: cover; margin-right: 2px;">
+                                            <img src="{% static '/donaciones-img/logomaster.png' %}" style="width: 1cm; height: 0.8cm; object-fit: cover; margin-right: 2px;">
+                                            <img src="{% static '/donaciones-img/amexlogo.png' %}" style="width: 1cm; height: 0.8cm; object-fit:contain;">
+                                        </div>
+                                     
+                                    </div>
+                                </div>
+                                <div class="card-body" style="height: 200px">
+                                    <div>
+                                        <label for="cc-number" class="control-label">Numeros de la tarjeta</label>
+                                        <input id="cc-number" type="tel" class="input-lg form-control cc-number" autocomplete="cc-number" placeholder="&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull;" required>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div >
+                                                <label for="cc-exp" class="control-label">Fecha de vencimiento</label>
+                                                <input id="cc-exp" type="tel" class="input-lg form-control cc-exp" autocomplete="cc-exp" placeholder="&bull;&bull; / &bull;&bull;" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div >
+                                                <label for="cc-cvc" class="control-label"> Codigo de seguridad </label>
+                                                <input id="cc-cvc" type="tel" class="input-lg form-control cc-cvc" autocomplete="off" placeholder="&bull;&bull;&bull;&bull;" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div >
+                                        <label for="numeric" class="control-label">Nombre de la tarjeta</label>
+                                        <input  type="text" class="input-lg form-control">
+                                    </div>
+                                    <div >
+                                        <br>
+                                        <input  value="Pagar" type="button" class="custom-button btn-block" style="font-size: .8rem;" onclick="realizarPago()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Sección de agradecimiento -->
+        <div id="agradecimiento" style="display: none; text-align: center; margin-top: 50px;">
+            <h2>¡Tu generosidad hace una gran diferencia!</h2>
+            <p>Ya sos parte de nuestra familia</p>
+            <!--imagen con forma de ticket -->
+            <img src="{% static '/donaciones-img/recibo.png' %}" alt="Ticket" style="max-width: 100%;">
+        </div>
+    
+        <!--funcion en JS con la biblio de Jquery se crea una funcion realizar pago que al activarse muestra el elemento agradecimiento -->
+        <script>
+            function realizarPago() {
+                // hacemos validaciones?
+                // si haces click en pagar aparece el ticekt de agradecimiento
+                $('#agradecimiento').show();
+    
+                // el scrolltop es una animacion que hace que se desplace hacia abajo
+                $('html, body').animate({
+                    scrollTop: $('#agradecimiento').offset().top
+                }, 1000);
+            }
+        </script>
+    
+        <button class="botonVolver" onclick="volverAlHome()">Volver</button>
+    
+        <script>
+            function volverAlHome() {
+                window.location.href = "{% url 'home' %}"; 
+            }
+        </script>
+    </body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6 mb-4">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="{% static '/cursosycapacitaciones-img/Adiestramiento.png' %}" alt="adiestramiento" style="width:100%;height:300px;">
+                            </div>
+                            <div class="flip-card-back">
+                                <br>
+                                <h3>Adiestramiento canino</h3>
+                                <p>Apto para adultos hasta 70 años y niños desde los 12 años, 
+                                    aprende a relacionarte con tu can y fortalecer el vinculo.
+                                </p>
+                                <br>
+                                <h5><a href="{% url 'adiestramiento' %}">Inscribite aca!</a></h5> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6 mb-4">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="{% static '/cursosycapacitaciones-img/lazarillo.png' %}" alt="lazarillo" style="width:100%;height:300px;">
+                            </div>
+                            <div class="flip-card-back">
+                                <br>
+                                <h3>Adopta un lazarillo</h3>
+                                <p>Entrenamos a los guias mas fieles, veni a buscar tu perro de compania.</p>
+                                <br>
+                                <h5>Inscribite aca! Desde el 01 de febrero</h5> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6 mb-4">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="{% static '/cursosycapacitaciones-img/primera-mascota.jpg' %}" alt="mascota" style="width:100%;height:300px;">
+                            </div>
+                            <div class="flip-card-back">
+                                <br>
+                                <h3>Mi primera mascota</h3>
+                                <p>Veni a descubrir el arte de cuidar a sus amigos peludos con amor y responsabilidad</p>
+                                <h5><a href="{% url 'adiestramiento' %}">Inscribite aca!</a></h5> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6 mb-4">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="{% static '/cursosycapacitaciones-img/escuela.png' %}" alt="colegios" style="width:100%;height:300px;">
+                            </div>
+                            <div class="flip-card-back">
+                                <br>
+                                <h3>Veni a visitarnos con tu colegio</h3>
+                                <p>Veni a pasar una tarde diferente junto a tu curso, aprendiendo sobre el cuidado y la importancia de los animales. 
+                                   Aceptamos clases de 10 hasta 20 niños, menores de 13 años </p>
+                                <br>
+                                <h5><a href="{% url 'adiestramiento' %}">Inscribite aca!</a></h5> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6 mb-4">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="{% static '/cursosycapacitaciones-img/primeros-auxilios.png' %}" alt="primeros-aux" style="width:100%;height:300px;">
+                            </div>
+                            <div class="flip-card-back">
+                                <br>
+                                <h3>Primeros auxilios</h3>
+                                <p>Te enseñamos los primeros pasos a tener en cuenta para ayudar a tu mascota mientras llega el vet, 
+                                    prevenir accidentes domesticos y actuar con conocimiento para proteger a tu mascota
+                                </p>
+                                <br>
+                                <h5><a href="{% url 'adiestramiento' %}">Inscribite aca!</a></h5> 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6 mb-4">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="{% static '/cursosycapacitaciones-img/gatoperro.jpg' %}" alt="transito" style="width:100%;height:300px;">
+                            </div>
+                            <div class="flip-card-back">
+                                <br>
+                                <h3>Adopcion y transito</h3>
+                                <p>Transforma una vida, adopta o transita un peludo que lo necesite</p>
+                                <h5><a href="{% url 'adiestramiento' %}">Inscribite aca!</a></h5> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+{% endblock %}

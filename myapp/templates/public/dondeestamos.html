@@ -1,0 +1,75 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+            integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+            crossorigin="anonymous">
+        </script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    </head>
+    <body>
+        <!-- Se dividio el body en dos columnas una a la izq con dos div y otras a la derecha con el mapa -->
+        <div class="container" style="max-width: 1500px;">
+            <div class="row" style="padding: 1em;">
+                <!-- columna izq -->
+                <div class="col-md-4"> <!--4 de 12 columnas para que sea responsive-->
+                    <div class="card text-grey bg-light mb-4">
+                        <div class="card-body">
+                            <img src="{% static '/ubicacion-img/ubicacion.jpg' %}" class="img-fluid" alt="collage">
+                        </div>
+                    </div>
+                    <div class="card text-grey bg-light">
+                        <div class="card-body">
+                            <img src="{% static '/ubicacion-img/ubicacion2.jpg' %}" class="img-fluid" alt="collage2">
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- columna derecha-->
+                <div class="col-md-8"> <!-- 8 de 12 columnas para que sea responsive-->
+                    <div class="card white-bg mb-4">
+                        <div class="card-body">
+                            <div>
+                                <p><a href="https://maps.app.goo.gl/kJwzx6cKvv4Mrtdu6"> Ruta 16 Parc 501, B1842 Monte Grande, Provincia de Buenos Aires</a></p>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3272.6087756343827!2d-58.435354124523606!3d-34.89116917285243!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcd524123fd69d%3A0xc8636b72951eb39b!2sEl%20campito%20Refugio!5e0!3m2!1ses!2sar!4v1702148621047!5m2!1ses!2sar" width="100%" height="570" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div style="text-align: center; font-family: 'Fantasy';">
+                                            <u>Nuestros horarios:</u>
+                                            <p><strong>Lunes a Viernes:</strong> 11:00 - 19:00 hs<br>
+                                                <strong>Sábados, domingos y feriados:</strong> 11:00 - 16:00 hs</p>
+                                            <u>Contactanos</u>
+                                            <p><strong>Teléfono:</strong> 0303-456<br>
+                                                <strong>Email:</strong> Adopt-Me@gmail.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
+
+{% endblock %}

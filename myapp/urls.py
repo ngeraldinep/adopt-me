@@ -25,7 +25,7 @@ urlpatterns = [
     path('formulario/logout/', views.signout, name="Logout"),
     
     # Paths para usuarios REGISTRADOS
-
+    path('notpublic/home_registrados/', views.home_registrados, name="home_registrados"),
     # Path de Formularios para usuario REGISTRADOS
     path('notpublic/create_fecha/', views.create_fecha, name="create_fecha"),
     path('notpublic/create_curso/', views.create_curso, name="create_curso"),

@@ -21,11 +21,9 @@ class Fechas(models.Model):
 
     def __str__(self):
         estado = "Disponible" if self.estado else "No Disponible"
-        return "{} - {} - {} - {}".format(
-            self.fecha.strftime('%Y-%m-%d %H:%M:%S'), 
-            self.id_turno.turno, 
-            estado,
-            self.usuario.username)
+        return "{} - {}".format(
+            self.fecha.strftime('%Y-%m-%d'), 
+            self.id_turno.turno)
 
 class Datos_Personales(models.Model):    
     id = models.AutoField(primary_key=True)

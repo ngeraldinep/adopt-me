@@ -9,8 +9,22 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 
 # Create your views here.
-def hello(request, username):
-    return HttpResponse("<h1>Hello %s <h1>" % username)
+def home_registrados(request):
+    username = request.user.username
+    # Consulta bbdd 
+    estado_cursos = Confirmados.objects.filter(estado=False).count()
+    estado_consultas = ConsultaReclamo.objects.filter(estado=False).count()
+    estado_adopcion = Adoptar.objects.filter(estado=False).count()
+    estado_lazarillos = Lazarillo.objects.filter(estado=False).count()
+    estado_visitas = Colegio.objects.filter(estado=False).count()
+
+    return render(request, 'notpublic/home_registrados.html', 
+                  {'username': username, 
+                   'estado_cursos': estado_cursos, 
+                   'estado_consultas': estado_consultas, 
+                   'estado_adopcion': estado_adopcion, 
+                   'estado_lazarillos': estado_lazarillos, 
+                   'estado_visitas': estado_visitas})    
 
 def home(request):
     title = 'Adopt-Me!'
@@ -171,7 +185,7 @@ def signin(request):
             })
         else:
             login(request, user)
-            return redirect('home')
+            return redirect('home_registrados')
 
 # Filtro y cambios de estado
 

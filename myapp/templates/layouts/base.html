@@ -43,6 +43,7 @@
     <nav class="container-nav">
         <ul>
             {% if user.is_authenticated %}
+            <li><a href="{% url 'home_registrados' %}">Home</a></li> 
             <li><a href="#">Formularios</a>
                 <ul>
                     <li><a href="{% url 'create_fecha' %}" style="font-size: 15px;">Formualrio Carga de Fechas</a></li>
@@ -65,8 +66,10 @@
                 <ul>
                     <li><a href="{% url 'consulta_detail' %}" style="font-size: 15px;">Consultas y Reclamos</a></li>
                 </ul>
+            </li> 
+            <li><a href="#">Solicitudes Pendientes</a>
                 <ul>
-                    <li><a href="{% url 'adoptar_detail' %}" style="font-size: 15px;">Adopciones y Transito</a></li>
+                    <li><a href="{% url 'adoptar_detail' %}" style="font-size: 15px;">Solicitudes de Adopcion y Transito</a></li>
                 </ul>
                 <ul>
                     <li><a href="{% url 'lazarillo_detail' %}" style="font-size: 15px;">Solicitudes de Perros Lazarillos</a></li>
@@ -94,6 +97,8 @@
     </main>
 
     <footer>
+        {% if user.is_authenticated %}
+        {% else %}
         <div class="footer">
             <p>Adopt-Me &reg;</p>
             <a href="https://instagram.com"><img src="{% static '/logosredes-img/instagram.png' %}" height="40px" width="40px" alt="instagram"></a>
@@ -101,6 +106,7 @@
             <a href="https://twitter.com"><img src="{% static '/logosredes-img/twitter.png' %}" height="40px" width="40px" alt="twitter"></a>
             <a href="https://linkedin.com"><img src="{% static '/logosredes-img/linkedin.png' %}" height="40px" width="40px" alt="linkedin"></a>     
         </div>
+        {% endif %}
     </footer>
 </body>
 </html>

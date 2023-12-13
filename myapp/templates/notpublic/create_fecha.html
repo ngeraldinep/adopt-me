@@ -5,7 +5,8 @@
 <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button>
+    <small>{{ form.fecha.help_text }}</small> {# Display help text for the fecha field #}
+    <button type="submit">
         Save
     </button>
 

@@ -108,7 +108,14 @@
     </head>
     
     <body>
-        <div class="body-donacionPago"><!-- El CCS me rompe el formulario pr alguna razon, si se borra esto se puede ver-->
+        <div style="background-image: url('/static/home-img/transito.jpeg');
+            background-size: 50%;
+            background-position: center;
+            background-attachment: fixed;  
+            background-repeat: no-repeat;
+            height: auto;
+            width: auto; 
+            margin: 0;"><!-- El CCS me rompe el formulario pr alguna razon, si se borra esto se puede ver-->
             <div class="padding-donacionPago" style="filter: brightness(100%)">
                 <div class="row">
                     <div class="container-fluid d-flex justify-content-center">
@@ -119,7 +126,7 @@
                                         <div class="col-md-6">
                                             <span style="font-family: Georgia, serif;"><h2>Ingrese los datos de su tarjeta</h2></span>
                                         </div>
-                                        <div class="col-md-6 text-right" style="margin-top: -5px;">
+                                        <div class="col-md-6 text-right" style="margin-top: 5px;">
                                             <img src="{% static '/donaciones-img/logovisa.png' %}" style="width: 1cm; height: 0.8cm; object-fit: cover; margin-right: 2px;">
                                             <img src="{% static '/donaciones-img/logomaster.png' %}" style="width: 1cm; height: 0.8cm; object-fit: cover; margin-right: 2px;">
                                             <img src="{% static '/donaciones-img/amexlogo.png' %}" style="width: 1cm; height: 0.8cm; object-fit:contain;">
@@ -127,7 +134,7 @@
                                      
                                     </div>
                                 </div>
-                                <div class="card-body" style="height: 200px">
+                                <div class="card-body" style="height: 500px">
                                     <div>
                                         <label for="cc-number" class="control-label">Numeros de la tarjeta</label>
                                         <input id="cc-number" type="tel" class="input-lg form-control cc-number" autocomplete="cc-number" placeholder="&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull;" required>

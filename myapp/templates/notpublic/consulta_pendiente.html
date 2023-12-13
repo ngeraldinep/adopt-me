@@ -1,0 +1,90 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+
+<style>
+  table {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    width: 80%;  /* Set a fixed width, adjust as needed */
+    margin: 10px auto;  /* Add some margin for spacing */
+  }
+
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  .change-state-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  h1, h2, form, th, td {
+    text-align: center;
+}
+</style>
+
+<h1>Consulta Detalle</h1>
+
+<!-- Add a form to submit the filter -->
+<h2>Consultas y Reclamos Registrados</h2>
+
+<form method="GET">
+    <label for="estado_filtrar">Filtrar por estado (0=true):</label>
+    <select name="estado_filtrar" id="estado_filtrar">
+        <option value="1">Terminado</option>
+        <option value="0">Pendiente</option>
+        <option value="" selected>Mostrar Todos</option>
+    </select>
+    <button type="submit">Filtrar</button>
+</form>
+
+
+
+<!-- Add table headers and style -->
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Fecha</th>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Telefono</th>
+    <th>Correo</th>
+    <th>Info Adicional</th>
+    <th>Termiando</th>
+    <th>Acciones</th>
+  </tr>
+
+  {% for dato in datos %}
+    <tr>
+      <td>{{ dato.id }}</td>
+      <td>{{ dato.fecha }}</td>
+      <td>{{ dato.id_persona.nombre }}</td>
+      <td>{{ dato.id_persona.apellido }}</td>
+      <td>{{ dato.id_persona.telefono }}</td>
+      <td>{{ dato.id_persona.correo }}</td>
+      <td>{{ dato.info_adicional }}</td>
+      <td>{{ dato.estado }}</td>
+      <td>
+        <form method="POST" action="{% url 'change_estado' dato.id %}">
+          {% csrf_token %}
+          <button type="submit" class="change-state-button">Cambiar Estado</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

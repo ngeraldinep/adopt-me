@@ -1,10 +1,8 @@
 from django.contrib import admin
-from .models import Project, Task, Persona, TipoCursada, Datos_Personales, Cursos, Confirmados,Lazarillo, Fechas, ConsultaReclamo, Adoptar, Colegio, Animal
+from .models import Persona, Datos_Personales, TipoCursada, Cursos, Turno, Confirmados, Lazarillo, Fechas, Animal, Adoptar, ConsultaReclamo, Colegio
 
 # Register your models here.
 
-admin.site.register(Project)
-admin.site.register(Task)
 admin.site.register(Persona)
 admin.site.register(Datos_Personales)
 admin.site.register(ConsultaReclamo)
@@ -16,3 +14,4 @@ admin.site.register(Lazarillo)
 admin.site.register(Adoptar)
 admin.site.register(Colegio)
 admin.site.register(Animal)
+admin.site.register(Turno)

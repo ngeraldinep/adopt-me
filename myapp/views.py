@@ -1,5 +1,5 @@
-from .models import Project, Task, Persona, TipoCursada, Cursos, Confirmados, Datos_Personales, Fechas, Turno
-from .forms import CreateNewTask, CreateNewProject, FormularioForm, FormularioCurso, FormularioConsultas, FormularioAdoptar, FormularioVisitas, FormularioLazarillo, FormularioFecha
+from .models import Persona, TipoCursada, Cursos, Confirmados, Datos_Personales, Fechas, Turno, ConsultaReclamo, Adoptar, Lazarillo, Colegio
+from .forms import FormularioCurso, FormularioConsultas, FormularioAdoptar, FormularioVisitas, FormularioLazarillo, FormularioFecha, FormularioNuevoCurso
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -7,123 +7,24 @@ from django.db import IntegrityError
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .forms import RangoFechasForm
-from .utils import generar_fechas_automaticas
-
-# from django.shortcuts import get_object_or_404, render
-
 
 # Create your views here.
-def index(request):
-    title = 'DJANGO CURSE'
-    return render(request, 'index.html', {
-        'title': title
-    })
+def home_registrados(request):
+    username = request.user.username
+    # Consulta bbdd 
+    estado_cursos = Confirmados.objects.filter(estado=False).count()
+    estado_consultas = ConsultaReclamo.objects.filter(estado=False).count()
+    estado_adopcion = Adoptar.objects.filter(estado=False).count()
+    estado_lazarillos = Lazarillo.objects.filter(estado=False).count()
+    estado_visitas = Colegio.objects.filter(estado=False).count()
 
-def hello(request, username):
-    return HttpResponse("<h1>Hello %s <h1>" % username)
-
-def about(request):
-    username = 'Eric'
-    return render(request, 'about.html', {
-        'username': username
-    })
-
-def fecha(request):
-    return render(request, 'notpublic/fecha.html')
-
-def projects(request):
-    # projects = list(Project.objects.values())
-    # return JsonResponse(projects, safe=False)
-    project = Project.objects.all()
-    return render(request, 'projects/projects.html', {
-        'project': project
-    })
-
-def task(request):
-    # task = get_object_or_404(Task, id=id)
-    # return HttpResponse('task: %s ' % task.title)
-    tasks = Task.objects.all()
-    return render(request, 'tasks/task.html', {
-        'tasks': tasks
-    })
-
-
-def create_task(request):
-    if request.method == 'GET':
-        # show interface
-        return render(request, 'tasks/create_task.html', {
-            'form': CreateNewTask()
-        })
-    else:
-        Task.objects.create(
-            title=request.POST['title'],
-            description=request.POST['description'],
-            project_id=2)
-        return redirect('task')
-
-
-def create_project(request):
-    form = CreateNewProject(request.POST)
-    sss = CreateNewTask(request.POST)
-
-    if request.method == 'POST':
-        if form.is_valid():
-            # show interface
-            return render(request, 'projects/create_project.html', {
-                'form': CreateNewProject()
-            })
-        else:
-            Project.objects.create(
-                name=request.POST['name'])
-
-        if sss.is_valid():
-            sss = CreateNewTask()
-            print(sss)
-            return render(request, 'projects/create_project.html', {
-                'sss': sss
-            })
-        else:
-            Task.objects.create(
-                title=request.POST['title'],
-                description=request.POST['description'],
-                project_id=2)
-    return render(request, 'projects/create_project.html', {'form': form, 'sss': sss})
-
-
-def create_fecha(request):
-    form = FormularioFecha(request.POST)
-
-    if request.method == 'POST':
-        if form.is_valid():
-            # show interface
-            return render(request, 'notpublic/create_fecha.html', {
-                'form': FormularioFecha()
-            })
-        else:
-            Project.objects.create(
-                name=request.POST['create_fecha'])
-
-    return render(request, 'notpublic/create_fecha.html', {'form': form})
-
-def project_detail(request, id):
-    project = get_object_or_404(Project, id=id)
-    tasks = Task.objects.filter(project_id=id)
-    return render(request, 'projects/detail.html', {
-        'project': project,
-        'tasks': tasks
-    })
-
-def fecha_detail(request, id):
-    id = get_object_or_404(Fechas, id=id)
-    fecha = Fechas.objects.filter(fecha=fecha)
-    turno = Fechas.objects.filter(turno=turno)
-    return render(request, 'notpublic/fecha.html', {
-        'id': id,
-        'fecha': fecha,
-        'turno': turno
-        # 'tasks': tasks
-    })
+    return render(request, 'notpublic/home_registrados.html', 
+                  {'username': username, 
+                   'estado_cursos': estado_cursos, 
+                   'estado_consultas': estado_consultas, 
+                   'estado_adopcion': estado_adopcion, 
+                   'estado_lazarillos': estado_lazarillos, 
+                   'estado_visitas': estado_visitas})    
 
 def home(request):
     title = 'Adopt-Me!'
@@ -137,31 +38,10 @@ def home(request):
         form = FormularioConsultas()
 
     return render(request, 'home.html', {'form': form, 'title': title})     
-    
-def xx(request):
-    if request.method == 'POST':
-        # show interface
-        sss = CreateNewTask()
-        print(sss)
-        return render(request, 'projects/create_project.html', {
-            'sss': sss
-        })
-    else:
-        Task.objects.create(
-            title=request.POST['title'],
-            description=request.POST['description'],
-            project_id=2)
-        return redirect('projects')
 
-def registrarme(request):
-    title = 'Registrate'
-    return render(request, 'public/formularios/registrarme.html', {
-        'title': title
-    })
-
-def cursoscapacitaciones(request):
+def capacitacioneseinscripciones(request):
     title = 'Capacitaciones e inscripciones'
-    return render(request, 'public/cursoscapacitaciones.html', {
+    return render(request, 'public/capacitacioneseinscripciones.html', {
         'title': title
     })
 
@@ -171,40 +51,25 @@ def dondeestamos(request):
         'title': title
     })
 
-def adoptar(request):
-    if request.method == 'POST':
-        form = FormularioAdoptar(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('adopcion')
-    else:
-        form = FormularioAdoptar()
-
-    return render(request, 'public/formularios/adopcion.html', {'form': form})   
-
 def historia(request):
     title = 'Nuestra historia'
     return render(request, 'public/historia.html', {
         'title': title
     })
 
-def adiestramiento(request):
-    if request.method == 'POST':
-        form = FormularioCurso(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('adiestramiento')
-    else:
-        form = FormularioCurso()
+def pago(request):
+    title = 'Donaciones / Pagos'
+    return render(request, 'public/formularios/donacionpago.html', {
+        'title': title
+    })
 
-    return render(request, 'public/formularios/adiestramiento.html', {'form': form})   
-
+# Formularios Publicos
 def visitas(request):
     if request.method == 'POST':
         form = FormularioVisitas(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('visitas')
+            return redirect('capacitacioneseinscripciones')
     else:
         form = FormularioVisitas()
 
@@ -215,28 +80,68 @@ def lazarillo(request):
         form = FormularioLazarillo(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('lazarillo')
+            return redirect('capacitacioneseinscripciones')
     else:
         form = FormularioLazarillo()
 
     return render(request, 'public/formularios/lazarillo.html', {'form': form})   
-
-def create_form(request):
-    title = 'Curso de adiestramiento canino'
-    return render(request, 'public/formularios/create_form.html', {
-        'title': title
-    })
     
-def pago(request):
-    title = 'Donaciones / Pagos'
-    return render(request, 'public/formularios/donacionpago.html', {
-        'title': title
-    })
+def adoptar(request):
+    if request.method == 'POST':
+        form = FormularioAdoptar(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('capacitacioneseinscripciones')
+    else:
+        form = FormularioAdoptar()
+
+    return render(request, 'public/formularios/adopcion.html', {'form': form})   
+
+def cursosycapacitaciones(request):
+    if request.method == 'POST':
+        form = FormularioCurso(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('capacitacioneseinscripciones')
+    else:
+        form = FormularioCurso()
+
+    return render(request, 'public/formularios/cursosycapacitaciones.html', {'form': form})   
+
+# Formulario No Publico
+def create_fecha(request):
+    if request.method == 'POST':
+        form = FormularioFecha(request.POST)   
+        if form.is_valid():
+            # Save the form data to create a new Fechas object
+            fecha_obj = form.save(commit=False)
+            fecha_obj.usuario = request.user  # Assuming you have a user associated with the request
+            fecha_obj.save()
+            return redirect('create_fecha')  # Redirect to the same page after successful form submission
+    else:
+        form = FormularioFecha()
+
+    return render(request, 'notpublic/create_fecha.html', {'form': form})
+
+def create_curso(request):
+    if request.method == 'POST':
+        form = FormularioNuevoCurso(request.POST)   
+        if form.is_valid():
+            # Save the form data to create a new Fechas object
+            fecha_obj = form.save(commit=False)
+            fecha_obj.usuario = request.user  # Assuming you have a user associated with the request
+            fecha_obj.save()
+            return redirect('create_curso')  # Redirect to the same page after successful form submission
+    else:
+        form = FormularioNuevoCurso()
+
+    return render(request, 'notpublic/create_curso.html', {'form': form})
+
+# Logeo y Registro
 
 def signout(request):
     logout(request)
     return redirect('home')
-
 
 def signup(request):
     title = 'Signup'
@@ -280,22 +185,64 @@ def signin(request):
             })
         else:
             login(request, user)
-            return redirect('home')
+            return redirect('home_registrados')
 
-def generar_fechas(request):
-    if request.method == 'POST':
-        form = RangoFechasForm(request.POST)
-        if form.is_valid():
-            print("Form is valid")
-            usuario_logueado = request.user.username
-            fecha_inicio = form.cleaned_data['fecha_inicio']
-            fecha_fin = form.cleaned_data['fecha_fin']
-            print(f"Usuario: {usuario_logueado}, Inicio: {fecha_inicio}, Fin: {fecha_fin}")
-            fechas_generadas = generar_fechas_automaticas(usuario_logueado, fecha_inicio, fecha_fin)
-            print(f"Fechas generadas: {fechas_generadas}")
-            return HttpResponse("Fechas generadas correctamente")
-        else:
-            print("Form is not valid")
-            form = RangoFechasForm()
+# Filtro y cambios de estado
 
-    return render(request, 'notpublic/generar_fechas.html', {'form': form})
+def filter_and_render(request, model_class, template_name):
+    # Get filter parameter
+    filtro = request.GET.get('estado_filtrar', None)
+    
+    # Check if filtro is not empty and is a valid integer
+    if filtro is not None and filtro.isdigit():
+        filtro = bool(int(filtro))  # Convert to boolean
+    else:
+        filtro = None  # Set to None if it's empty or not a valid integer
+
+    # Initial queryset
+    datos = model_class.objects.all()
+
+    # Apply filtering if a filtro is provided
+    if filtro is not None:
+        datos = datos.filter(estado=filtro)
+
+    return render(request, template_name, {
+        'datos': datos,
+    })
+    
+def change_status(request, id, model_class, redirect_target):
+    instance = get_object_or_404(model_class, id=id)
+    estado_filtrar = None
+
+    if hasattr(instance, 'estado'):
+        estado_filtrar = 'estado'
+    # elif hasattr(instance, 'estado'):
+    #     estado_filtrar = 'estado'
+    # elif hasattr(instance, 'estado'):
+    #     estado_filtrar = 'estado'
+
+    if estado_filtrar is not None:
+        setattr(instance, estado_filtrar, not getattr(instance, estado_filtrar))  # Toggle the status field
+        instance.save()
+    return redirect(redirect_target)
+
+def change_adopcion(request, id):
+    return change_status(request, id, Adoptar, 'adoptar_detail')
+
+def change_estado(request, id):
+    return change_status(request, id, ConsultaReclamo, 'consulta_detail')
+
+def change_lazarillo(request, id):
+    return change_status(request, id, Lazarillo, 'lazarillo_detail')
+
+def change_inscripciones(request, id):
+    return change_status(request, id, Confirmados, 'inscripciones_detail')
+
+def change_visitas(request, id):
+    return change_status(request, id, Colegio, 'visitas_detail')
+
+def change_fechas(request, id):
+    return change_status(request, id, Fechas, 'fechas_detail')
+
+def change_cursosycapacitaciones(request, id):
+    return change_status(request, id, Cursos, 'cursosycapacitaciones_detail')

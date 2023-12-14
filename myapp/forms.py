@@ -1,31 +1,10 @@
 from django import forms
 from .models import Cursos, TipoCursada, Persona, Datos_Personales, Confirmados, ConsultaReclamo, Animal, Adoptar, Colegio, Lazarillo, Turno,Fechas
 
-class CreateNewTask(forms.Form):
-    title = forms.CharField(label="Titulo tarea", max_length=200, widget=forms.TextInput(attrs={'class':'input'}))
-    description = forms.CharField(label="Descripcion de la tarea", widget=forms.Textarea(attrs={'class':'input'}))
-    
-class CreateNewProject(forms.Form):
-    name = forms.CharField(label="Nombre poryecto", max_length=200, widget=forms.TextInput(attrs={'class':'input'}))
-    
-class FormularioForm(forms.Form):
-    nombre = forms.CharField(label="Nombre", max_length=30, widget=forms.TextInput(attrs={'class':'input'}))
-    apellido = forms.CharField(label="Apellido", max_length=30, widget=forms.TextInput(attrs={'class':'input'}))
-    telefono = forms.CharField(label="Número de Celular", max_length=8, widget=forms.TextInput(attrs={'class':'input'}))    
-    correo = forms.EmailField(max_length = 200)      
-    #tipo_consulta_reclamo = forms.CharField(required=True)(label="Tipo", widget=forms.Select(attrs={'class':'input'}))
-    texto_libre = forms.CharField(label="Texto", widget=forms.Textarea(attrs={'class':'input'}))    
-    #checkbox_llamado = forms.RadioSelect(widget=forms.RadioSelect())     
-    
-    # class Meta:
-    #     model = Formulario_consultas
-    #     fields = ['nombre', 'apellido', 'telefono', 'correo', 'tipo_consulta_reclamo', 'texto_libre', 'checkbox_llamado']
-    #     widgets = {'tipo_consulta_reclamo': forms.Select(attrs={'class': 'form-control'}),}
-
 class FormularioCurso(forms.ModelForm):
     # Datos del Curso - Tabla Confirmados
-    nombre_curso = forms.ModelChoiceField(queryset=Cursos.objects.filter(disponible=True), label='Nombre del curso')
-    modalidad_curso = forms.ModelChoiceField(queryset=TipoCursada.objects.filter(disponible=True), label='Modalidad del curso')
+    nombre_curso = forms.ModelChoiceField(queryset=Cursos.objects.filter(estado=True), label='Nombre del curso')
+    modalidad_curso = forms.ModelChoiceField(queryset=TipoCursada.objects.filter(estado=True), label='Modalidad del curso')
 
     # Datos del usuario - Tablas Persona y Datos_Personales
     nombre = forms.CharField(max_length=30, label='Nombre')
@@ -33,12 +12,12 @@ class FormularioCurso(forms.ModelForm):
     dni = forms.IntegerField(label='DNI')
     telefono = forms.IntegerField(label='Teléfono')
     correo = forms.EmailField(label='Correo electrónico')
-    fecha_inscripcion = forms.DateField(label='Fecha de inscripción')
+    fecha_inscripcion = forms.ModelChoiceField(queryset=Fechas.objects.filter(estado=True), label='Fecha de inscripcion')
 
     class Meta:
         model = Confirmados
         fields = ['nombre_curso', 'modalidad_curso', 'nombre', 'apellido', 'dni', 'telefono', 'correo', 'fecha_inscripcion']
-
+        
     def save(self, commit=True):
         # Guardar los datos relacionados en las tablas correspondientes
         confirmacion = super().save(commit=False)
@@ -50,11 +29,12 @@ class FormularioCurso(forms.ModelForm):
         )
         datos_personales = Datos_Personales.objects.create(
             dni=self.cleaned_data['dni'],
-            fecha_nacimiento=self.cleaned_data['fecha_inscripcion'],
-            id_persona=persona
         )
+        persona.id_datospersonales = datos_personales
+        persona.save()
         confirmacion.id_cursos = self.cleaned_data['nombre_curso']
         confirmacion.id_tipo_cursada = self.cleaned_data['modalidad_curso']
+        confirmacion.id_fechas = self.cleaned_data['fecha_inscripcion']
         confirmacion.id_persona = persona
 
         if commit:
@@ -62,11 +42,8 @@ class FormularioCurso(forms.ModelForm):
         return confirmacion
 
 class FormularioConsultas(forms.ModelForm):
-    # Consulta/Reclamo - Tabla Confirmados
-    # Datos del usuario - Tablas Persona
     nombre = forms.CharField(max_length=30, label='Nombre')
     apellido = forms.CharField(max_length=30, label='Apellido')
-    # fecha = forms.DateField(label='Fecha de inscripción')
     telefono = forms.IntegerField(label='Teléfono')
     correo = forms.EmailField(label='E-Mail')
     info_adicional = forms.CharField(required=False, widget=forms.Textarea)
@@ -114,7 +91,7 @@ class FormularioAdoptar(forms.ModelForm):
     correo = forms.EmailField(label='E-Mail')
     
     # Datos animal - Tabla animal
-    animal = forms.ModelChoiceField(queryset=Animal.objects.filter(disponible=True), label='¿A que animalito quisieras ayudar?')
+    animal = forms.ModelChoiceField(queryset=Animal.objects.filter(estado=True), label='¿A que animalito quisieras ayudar?')
     
     # Datos Adopcio - Tabla Adoptar
     info_adicional = forms.CharField(required=False, widget=forms.Textarea)
@@ -134,6 +111,9 @@ class FormularioAdoptar(forms.ModelForm):
     class Meta:
         model = Adoptar
         fields = ['nombre', 'apellido', 'dni', 'fecha_nacimiento','telefono', 'correo', 'animal', 'info_adicional','consulta_transito' ]
+        widgets = {
+            'fecha_nacimiento': forms.DateInput(attrs={'type': 'date'}, format='%d-%m-%Y'),
+        }
     # Guardado del del Formulario
     def save(self, commit=True):
         # Guardar los datos relacionados en las tablas correspondientes
@@ -163,7 +143,7 @@ class FormularioVisitas(forms.ModelForm):
     nombre_colegio = forms.CharField(max_length=100, label='Nombre de la institucion')
     cargo = forms.CharField(max_length=50, label='Cargo')
     cant_visitantes = forms.IntegerField(label='Cantidad de visitantes')
-    rango_fechas  = forms.CharField(required=False, widget=forms.Textarea)
+    fecha_visita = forms.ModelChoiceField(queryset=Fechas.objects.filter(estado=True), label='Fecha de visita')
     # Datos del usuario - Tablas Persona
     nombre = forms.CharField(max_length=30, label='Nombre')
     apellido = forms.CharField(max_length=30, label='Apellido')
@@ -175,7 +155,7 @@ class FormularioVisitas(forms.ModelForm):
         fields = ['nombre_colegio', 
                   'cargo', 
                   'cant_visitantes', 
-                  'rango_fechas', 
+                  'fecha_visita', 
                   'nombre', 
                   'apellido', 
                   'telefono', 
@@ -192,6 +172,7 @@ class FormularioVisitas(forms.ModelForm):
         )
 
         confirmacion.id_persona = persona
+        confirmacion.id_fechas = self.cleaned_data['fecha_visita']
         
         if commit:
             confirmacion.save()
@@ -238,31 +219,50 @@ class FormularioLazarillo(forms.ModelForm):
 
 class FormularioFecha(forms.ModelForm):
    
-    id_turno = forms.ModelChoiceField(queryset=Turno.objects.filter(disponible=True), label='Turno')
-   
-    # Fecha - Tabla Fechas
-    fecha = forms.DateField(label='Fecha')
-    disponible = forms.BooleanField(label='Disponible', required=False)
+    id_turno = forms.ModelChoiceField(queryset=Turno.objects.filter(estado=True), label='Turno')
+    fecha = forms.DateField(label='Fecha', help_text='Formato: YYYY-MM-DD')
+    estado = forms.BooleanField(label='estado', required=False)
     info_adicional = forms.CharField(required=False, widget=forms.Textarea)
 
     class Meta:
         model = Fechas 
         fields = ['fecha', 
                   'id_turno', 
-                  'disponible', 
+                  'estado', 
                   'info_adicional' 
                   ]
 
-    def save(self, commit=True):
+    def save(self, commit=True, usuario=None):
         # Guardar los datos relacionados en las tablas correspondientes
         confirmacion = super().save(commit=False)
 
         confirmacion.id_turno = self.cleaned_data['id_turno']
         
+        if usuario:
+            confirmacion.usuario = usuario  # Set the usuario field if provided
+
         if commit:
             confirmacion.save()
         return confirmacion
-    
-class RangoFechasForm(forms.Form):
-    fecha_inicio = forms.DateField(label='Fecha de inicio')
-    fecha_fin = forms.DateField(label='Fecha de fin')
+
+class FormularioNuevoCurso(forms.ModelForm):
+   
+    nombre_curso = forms.CharField(max_length=100, label='Nombre del curso o capacitacion')
+    estado = forms.BooleanField(label='estado', required=False)
+
+    class Meta:
+        model = Cursos 
+        fields = ['nombre_curso', 
+                  'estado'
+                  ]
+
+    def save(self, commit=True, usuario=None):
+        # Guardar los datos relacionados en las tablas correspondientes
+        confirmacion = super().save(commit=False)
+        
+        if usuario:
+            confirmacion.usuario = usuario  # Set the usuario field if provided
+
+        if commit:
+            confirmacion.save()
+        return confirmacion

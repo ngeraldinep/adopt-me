@@ -2,35 +2,54 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from .models import ConsultaReclamo, Adoptar, Lazarillo, Confirmados, Colegio, Fechas, Cursos
+
 
 urlpatterns = [
-    path('home/', views.index, name="index"),
-    path('about/', views.about, name="about"),
-    path('hello/<str:username>', views.hello, name="hello"),
-    path('projects/', views.projects, name="projects"),
-    path('projects/<int:id>', views.project_detail, name="project_detail"),
-    path('notpublic/<int:id>', views.fecha_detail, name="fecha_detail"),
-    path('task/', views.task, name="task"),
-    path('notpublic/fecha', views.fecha, name="fecha"),
-    path('create_task/', views.create_task, name="create_task"),
-    path('create_project/', views.create_project, name="create_project"),
-    path('create_fecha/', views.create_fecha, name="create_fecha"),
+    # Paths para usuarios NO REGISTRADOS
     path('', views.home, name="home"),
-    path('cursoscapacitaciones/', views.cursoscapacitaciones, name="cursoscapacitaciones"),
-    path('registrarme/', views.registrarme, name="registrarme"),
     path('dondeestamos/', views.dondeestamos, name="dondeestamos"),
     path('historia/', views.historia, name="historia"),
-    path('adiestramiento/', views.adiestramiento, name="adiestramiento"),
-    path('create_form/', views.create_form, name="create_form"),
-    path('signup/', views.signup, name="Signup"),
-    path('signin/', views.signin, name="signin"),
-    path('logout/', views.signout, name="Logout"),
-    path('donacionpago/', views.pago, name="donacionpago"),
-    path('adopcion/', views.adoptar, name="adopcion"),
-    path('visitas/', views.visitas, name="visitas"),
-    path('lazarillo/', views.lazarillo, name="lazarillo"),
-    path('generar_fechas/', views.generar_fechas, name="generar_fechas"),
+    path('capacitacioneseinscripciones/', views.capacitacioneseinscripciones, name="capacitacioneseinscripciones"),
     
+    # Path de Formularios para usuario NO REGISTRADOS
+    path('formulario/cursosycapacitaciones/', views.cursosycapacitaciones, name="cursosycapacitaciones"),
+    path('formulario/visitas/', views.visitas, name="visitas"),
+    path('formulario/lazarillo/', views.lazarillo, name="lazarillo"),
+    path('formulario/adopcion/', views.adoptar, name="adopcion"),
+    path('formulario/donacionpago/', views.pago, name="donacionpago"),
+    
+    # Path de Registro, login y logout
+    path('formulario/signup/', views.signup, name="Signup"),
+    path('formulario/signin/', views.signin, name="signin"),
+    path('formulario/logout/', views.signout, name="Logout"),
+    
+    # Paths para usuarios REGISTRADOS
+    path('notpublic/home_registrados/', views.home_registrados, name="home_registrados"),
+    # Path de Formularios para usuario REGISTRADOS
+    path('notpublic/create_fecha/', views.create_fecha, name="create_fecha"),
+    path('notpublic/create_curso/', views.create_curso, name="create_curso"),
 
+    # Paths de Consultas y Cambio de Estado 
+    path('notpublic/consulta_detail/', views.filter_and_render, {'model_class': ConsultaReclamo, 'template_name': 'notpublic/consulta_pendiente.html'}, name='consulta_detail'),
+    path('notpublic/change_estado/<int:id>/', views.change_estado, name='change_estado'),
+    
+    path('notpublic/adoptar_detail/', views.filter_and_render, {'model_class': Adoptar, 'template_name': 'notpublic/consulta_adopcion.html'}, name='adoptar_detail'),
+    path('notpublic/change_adopcion/<int:id>/', views.change_adopcion, name='change_adopcion'),
+    
+    path('notpublic/lazarillo_detail/', views.filter_and_render, {'model_class': Lazarillo, 'template_name': 'notpublic/consulta_lazarillo.html'}, name='lazarillo_detail'),
+    path('notpublic/change_lazarillo/<int:id>/', views.change_lazarillo, name='change_lazarillo'),
+    
+    path('notpublic/inscripciones_detail/', views.filter_and_render, {'model_class': Confirmados, 'template_name': 'notpublic/consulta_inscripciones.html'}, name='inscripciones_detail'),
+    path('notpublic/change_inscripciones/<int:id>/', views.change_inscripciones, name='change_inscripciones'),
+    
+    path('notpublic/visitas_detail/', views.filter_and_render, {'model_class': Colegio, 'template_name': 'notpublic/consulta_visitas.html'}, name='visitas_detail'),
+    path('notpublic/change_visitas/<int:id>/', views.change_visitas, name='change_visitas'),
+    
+    path('notpublic/fechas_detail/', views.filter_and_render, {'model_class': Fechas, 'template_name': 'notpublic/consulta_fechas.html'}, name='fechas_detail'),
+    path('notpublic/change_fechas/<int:id>/', views.change_fechas, name='change_fechas'),
+    
+    path('notpublic/cursosycapacitaciones_detail/', views.filter_and_render, {'model_class': Cursos, 'template_name': 'notpublic/consulta_cursosycapacitaciones.html'}, name='cursosycapacitaciones_detail'),
+    path('notpublic/change_cursosycapacitaciones/<int:id>/', views.change_cursosycapacitaciones, name='change_cursosycapacitaciones'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

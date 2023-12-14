@@ -1,0 +1,32 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<h1> Bienvenido, {{username}} </h1>
+<br>
+<div>
+    <h2>Estas son las tareas pendientes:</h2>
+    <ul>
+        <li>
+            <h3>Solicitudes de inscripcion a Cursos y capacitaciones pendientes de confirmacion: <a href="{% url 'inscripciones_detail' %}" >{{ estado_cursos }}</a> 📚</h3>
+        </li>
+        <li>
+            <h3>Recepcion de Consultas y Reclamos pendientes de responder: <a href="{% url 'consulta_detail' %}" >{{ estado_consultas }}</a> 📝</h3>
+        </ul>
+    </ul>
+    <br>
+    <h2>Estas son las solicitudes pendientes:</h2>
+    <ul>
+        <li>
+            <h3>Solicitudes de Adopcion y Transito pendientes de responder: <a href="{% url 'adoptar_detail' %}" >{{ estado_adopcion }}</a> 🐶🐱</h3>
+        </li>
+        <li>
+            <h3>Solicitudes de Perro Lazarillos pendientes de responder: <a href="{% url 'lazarillo_detail' %}" >{{ estado_lazarillos }}</a> 🐕‍🦺 🦮</h3>
+        </li>
+        <li>
+            <h3>Solicitudes de Visitas de Colegios pendientes de responder: <a href="{% url 'visitas_detail' %}" >{{ estado_visitas }}</a>🏫</h3>
+        </li>
+    </ul>
+</div>
+
+{% endblock %}

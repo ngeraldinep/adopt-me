@@ -133,8 +133,8 @@ header {
   margin-bottom: 0px !important;
 }
 
-.body-donacionPago {
-  background-image: url("fondo-donacion.jpg");
+ .body-donacionPago {
+  background-image: url"{% static 'myapp/static/home-img/fondo-donacion.jpg' %}" ;
   background-position: center center; 
   background-repeat: no-repeat;
   background-size: contain;
@@ -146,9 +146,9 @@ header {
   height: 100vh;
   margin: 0;
   padding: 0;
-}
+} 
 
-/* .donaciones {
+ .donaciones {
   font-family: 'Fantasy';
   font-size: 1.2em;
   font-weight: bold;
@@ -161,7 +161,7 @@ header {
   margin-top: 2em;
   margin-bottom: 2em;
 
-} */
+}
 
 .mediosDePago {
   text-align: center;
@@ -184,7 +184,7 @@ form
   transform : scale(1.2);
 }
 
-/* .btn{
+.btn{
   display: inline-block;
   position: relative;
   text-decoration: none;
@@ -219,7 +219,7 @@ form
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0, 0, 0, 0.19);
   border-bottom: solid 2px #d8d8d8;
 }
-}*/
+
 
 
 /* Carta giratoria */
@@ -299,13 +299,14 @@ form
   padding: 3rem !important; 
   position: relative;
   
-}
+} 
 
 .padding-donacionPago .card {
   background-color: rgba(255, 255, 255, 0.623); /* Color de fondo con opacidad ajustable */
-  filter: grayscale(10%); /* Ajusta el porcentaje según tus preferencias */
+  filter: grayscale(10%), rightness(100%); /* Ajusta el porcentaje según tus preferencias */
+  font-size: large;
   border-radius: 25px; /* Ajusta el radio del borde según tus preferencias */
-  padding: 20px; /* Ajusta el padding según tus preferencias */
+  /*padding: 20px;  Ajusta el padding según tus preferencias */
 }
 
 .padding-donacionPago .form-group label {
@@ -342,7 +343,7 @@ form
   background-color: #45a049; 
 }
 
-.botonVolver {
+ .botonVolver {
   position: fixed;
   top: 10px;
   left: 10px;
@@ -356,7 +357,7 @@ form
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   transition: background-color 0.3s ease; 
-}
+} 
 
 .corte-pagina {
   background-color: #d6cdcd; 
@@ -403,3 +404,5 @@ textarea.centrar-texto {
   box-sizing: border-box;
 }
 
+
+}

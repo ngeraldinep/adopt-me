@@ -46,37 +46,48 @@
             }
         </script>        
         <div class="corte-pagina" style="background-color: #fcf8f3">  
+            <form>
+                <input type="hidden" name="monto_donado" id="monto_donado" value="">
                 <div>
-                    <label>
-                        <h3>Dona hoy! salva una vida</h3>
-                    </label>
-
-                    <div>
-                        <label for="donar-unavez" class="my-1 mt-0">
-                            <input x-on:click="selected = 'opt1'" id="unavez" type="radio" name="plan" value="donar1" checked>
-                            Donar una vez $2000
-                        </label>
-                        <br>
-
-                        <label for="donar-mensual" class="my-1">
-                            <input x-on:click="selected = 'opt2'" id="mensual" type="radio" name="plan" value="donarmes">
-                            Donar mensual - <strong>$5000</strong>
-                        </label>
-                        <br>
-                        <label for="donar-anual" class="my-1 mb-0">
-                            <input x-on:click="selected = 'opt3'" id="anual" type="radio" name="plan" value="donaranio">
-                            Donar anualmente - <strong>$60000</strong><span class="text-green-500"></span>
-                        </label>
-                    </div>
+                    <h3>Dona hoy! salva una vida</h3>
                 </div>
-                <div x-show="selected !== 'opt1'" x-cloak></div>
-
+            
+                <div>
+                    <label for="unavez" class="my-1 mt-0">
+                        <input x-on:click="selected = 'opt1'" id="unavez" type="radio" name="plan" value="donar1" checked>
+                        Donar una vez $2000
+                    </label>
+                    <br>
+            
+                    <label for="mensual" class="my-1">
+                        <input x-on:click="selected = 'opt2'" id="mensual" type="radio" name="plan" value="donarmes">
+                        Donar mensual - <strong>$5000</strong>
+                    </label>
+                    <br>
+            
+                    <label for="anual" class="my-1 mb-0">
+                        <input x-on:click="selected = 'opt3'" id="anual" type="radio" name="plan" value="donaranio">
+                        Donar anualmente - <strong>$60000</strong><span class="text-green-500"></span>
+                    </label>
+                </div>
+            
                 <div style="padding: 2em;">
-                    <a href="{% url 'donacionpago' %}"> 
-                        <button id="card-button" type="button" class="submit-button">Donar</button>
-                    </a>
+                    <button type="button" class="submit-button" onclick="realizarPago()">Donar</button>
                 </div>
             </form>
+            <script>
+                function realizarPago() {
+                    // Aquí puedes agregar la lógica de pago si es necesario
+                    // ...
+            
+                    // Después de la lógica de pago, redirige a la página de donación de pago
+                    window.location.href = '{% url "donacionpago" %}';
+                }
+            </script>
+            
+            <!-- para que tome el valor -->
+        
+
         </div>    
         <div class="corte-pagina">
             <div style="padding: 3em " id="contacto-sugerencia">

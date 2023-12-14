@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone 
-# Con on_delete le decimos que tiene q hacer cuando se borrra un projecto
+# Con on_delete le decimos que tiene q hacer cuando se borrra un proyecto
 # Create your models here.
 
 class Project(models.Model):

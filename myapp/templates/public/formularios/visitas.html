@@ -9,13 +9,63 @@
     <head>
     </head>
     <body>
-        <form method="post" action="/visitas/" class="container_formularios" style="float:left  ; margin:2em;" >
-            {% csrf_token %}
+        
 
-            <h2 style="text-indent: 1em;"><b>Completa el formualario para reservar una fecha y venir a visitarnos con tu colegio </b></h2>
-            {{ form.as_p }}
-            <button type="submit" colspan="2" style="text-align: center;" class="submit-button">Guardar</button>
-        </form>
+        <h2 style="text-indent: 1em; padding: 20px; margin-top: 80px;"><b>Veni a visitarnos con tu colegio </b></h2>
+
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <form method="post" action="/visitas/" class="card card-body text-center">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="nombre-colegio">Nombre del colegio:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="nombre-colegio" id="nombre-colegio" class="form-control" placeholder="">
+                    </div>
+                    
+
+                    <div class="mb-3">
+                        <label for="nombre">Nombre:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="nombre" id="nombre" class="form-control" placeholder="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre">Apellido:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="apellido" id="apellido" class="form-control" placeholder="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cargo">Cargo:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="cargo" id="cargo" class="form-control" placeholder="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono">Teléfono:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="telefono" id="telefono" class="form-control" placeholder="Ingrese su teléfono">
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo">E-mail:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="correo" id="correo" class="form-control" placeholder="Ingrese su correo electrónico">
+                    </div>
+                    <div class="mb-3">
+                        <label for="fecha">Fecha de inscripcion:</label>
+                        <select id="fecha" name="fecha">
+                            <option value="201123">20-11-23 - Turno tarde</option>
+                            <option value="241123">24-11-23 - Turno tarde</option>
+                            <option value="181223">18-12-23 - Turno tarde</option>
+                            <option value="271223">27-12-23 - Turno tarde</option>
+                            <option value="241123">24-11-23 - Turno mañana</option>
+                            <option value="131223">13-12-23 - Turno mañana</option>
+                            <option value="040123">04-01-23 - Turno mañana</option>
+                            <option value="060123">06-01-23 - Turno mañana</option>
+                            <option value="150123">15-01-23 - Turno mañana</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <button type="submit">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>         
     </body>
 
 </html>

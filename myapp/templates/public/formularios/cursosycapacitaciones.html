@@ -24,12 +24,72 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     </head>
     <body>
-        <form method="post" class="container_formularios" style="float:left  ; margin:2em;" >
-            {% csrf_token %}
-            <h2 style="text-indent: 1em;"><b>Aprende mas sobre tu peludo y fortalece la relacion</b></h2>
-            {{ form.as_p }}
-            <button type="submit" colspan="2" style="text-align: center;" class="submit-button">Guardar</button>
-        </form>          
+           
+        <h2 style="text-indent: 1em; padding: 20px; margin-top: 80px;"><b>Aprende mas sobre tu peludo</b></h2>
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <form method="post" class="card card-body text-center">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="curso">Nombre del curso:</label>
+                        <select id="curso" name="curso" >
+                            <option value="primerMascota">Mi primera mascota</option>
+                            <option value="adiestramiento">Adiestramiento canino</option>
+                        </select>
+                    </div>  
+                    <div class="mb-3">
+                        <label for="curso">Modalidad del curso:</label>
+                        <select id="modalidad" name="modalidad">
+                            <option value="presencial">Presencial</option>
+                            <option value="adiestramiento">Virtual</option>
+                        </select>
+                    </div> 
+                    <div class="mb-3">
+                        <label for="nombre">Nombre:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="nombre" id="nombre" class="form-control" placeholder="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre">Apellido:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="apellido" id="apellido" class="form-control" placeholder="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="DNI">DNI:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="number" DNI="apellido" id="DNI" class="form-control" placeholder="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono">Teléfono:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="telefono" id="telefono" class="form-control" placeholder="Ingrese su teléfono">
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo">E-mail:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="correo" id="correo" class="form-control" placeholder="Ingrese su correo electrónico">
+                    </div>
+                    <div class="mb-3">
+                        <label for="fecha">Fecha de inscripcion:</label>
+                        <select id="fecha" name="fecha">
+                            <option value="201123">20-11-23 - Turno tarde</option>
+                            <option value="241123">24-11-23 - Turno tarde</option>
+                            <option value="181223">18-12-23 - Turno tarde</option>
+                            <option value="271223">27-12-23 - Turno tarde</option>
+                            <option value="241123">24-11-23 - Turno mañana</option>
+                            <option value="131223">13-12-23 - Turno mañana</option>
+                            <option value="040123">04-01-23 - Turno mañana</option>
+                            <option value="060123">06-01-23 - Turno mañana</option>
+                            <option value="150123">15-01-23 - Turno mañana</option>
+                            
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit">
+                            Guardar
+                        </button>
+                    </div>
+                </form>    
+            </div> 
+        </div>           
+
+
+
     </body>
         
 </html>

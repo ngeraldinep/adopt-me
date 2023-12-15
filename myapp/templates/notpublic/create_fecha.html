@@ -1,15 +1,48 @@
 {% extends 'layouts/base.html' %}
 {% block content %}
 
-<h1>Project 1</h1>
-<form method="POST">
+<h1>Creacion de fechas</h1>
+<!-- <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <small>{{ form.fecha.help_text }}</small> {# Display help text for the fecha field #}
     <button type="submit">
-        Save
-    </button>
-
+        Guardar
+    </button> 
+ -->
 </form>
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <form method="post" class="card card-body text-center">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="fecha">Fecha:</label>
+                <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="fecha" id="fecha" class="form-control" placeholder="YYYY-MM-DD">
+            </div>
+            <div class="mb-3">
+                <label for="opciones">Turno:</label>
+                <select id="turno" name="turno">
+                    <option value="opcion1">Mañana</option>
+                    <option value="opcion2">Tarde</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>
+                    <input type="radio" name="habilitar" value="habilitar">
+                    Habilitar
+                </label>
+            </div>    
+            <div class="mb-3">
+                <label for="informacion">Informacion adicional:</label>
+                <textarea style="resize: none; justify-content: center; display: flex; text-align: center;" id="informacion" name="informacion" rows="3" class="form-control" placeholder="..."></textarea>
+            </div>
+            <div class="mb-3">
+                <button type="submit">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

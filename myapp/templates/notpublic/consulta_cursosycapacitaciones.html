@@ -42,7 +42,7 @@
 <h2>Habilitacion de Cursos y Capacitaciones</h2>
 
 <form method="GET">
-    <label for="estado_filtrar">Filtrar por estado (0=true):</label>
+    <label for="estado_filtrar">Filtrar por estado:</label>
     <select name="estado_filtrar" id="estado_filtrar">
         <option value="1">Habilitado</option>
         <option value="0">Cerrado</option>
@@ -58,6 +58,7 @@
   <tr>
     <th>ID</th>
     <th>Nombre</th>
+    <th>Quien lo creo</th> 
     <th>Habilitado</th>
     <th>Acciones</th>
   </tr>
@@ -66,6 +67,7 @@
     <tr>
       <td>{{ dato.id }}</td>
       <td>{{ dato.nombre_curso }}</td>
+      <td>{{ dato.usuario.username }}</td>
       <td>{{ dato.estado }}</td>
       <td>
         <form method="POST" action="{% url 'change_cursosycapacitaciones' dato.id %}">

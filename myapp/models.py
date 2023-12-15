@@ -1,11 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-<<<<<<< HEAD
-from django.utils import timezone 
-# Con on_delete le decimos que tiene q hacer cuando se borrra un proyecto
-=======
-# Con on_delete le decimos que tiene q hacer cuando se borrra un projecto
->>>>>>> 247444cd392cbc6adcccbec5e74887f34b2f40e9
+
+
 # Create your models here.
 
 class Turno(models.Model):    

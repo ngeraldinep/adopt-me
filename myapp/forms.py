@@ -1,5 +1,6 @@
 from django import forms
 from .models import Cursos, TipoCursada, Persona, Datos_Personales, Confirmados, ConsultaReclamo, Animal, Adoptar, Colegio, Lazarillo, Turno,Fechas
+from django.contrib.auth.forms import UserCreationForm
 
 class FormularioCurso(forms.ModelForm):
     # Datos del Curso - Tabla Confirmados
@@ -114,7 +115,7 @@ class FormularioAdoptar(forms.ModelForm):
         widgets = {
             'fecha_nacimiento': forms.DateInput(attrs={'type': 'date'}, format='%d-%m-%Y'),
         }
-    # Guardado del del Formulario
+    # Guardado del Formulario
     def save(self, commit=True):
         # Guardar los datos relacionados en las tablas correspondientes
         confirmacion = super().save(commit=False)
@@ -221,8 +222,8 @@ class FormularioFecha(forms.ModelForm):
    
     id_turno = forms.ModelChoiceField(queryset=Turno.objects.filter(estado=True), label='Turno')
     fecha = forms.DateField(label='Fecha', help_text='Formato: YYYY-MM-DD')
-    estado = forms.BooleanField(label='estado', required=False)
-    info_adicional = forms.CharField(required=False, widget=forms.Textarea)
+    estado = forms.BooleanField(label='Habilitar', required=False)
+    info_adicional = forms.CharField(label='Descripcion',required=False, widget=forms.Textarea)
 
     class Meta:
         model = Fechas 
@@ -248,7 +249,7 @@ class FormularioFecha(forms.ModelForm):
 class FormularioNuevoCurso(forms.ModelForm):
    
     nombre_curso = forms.CharField(max_length=100, label='Nombre del curso o capacitacion')
-    estado = forms.BooleanField(label='estado', required=False)
+    estado = forms.BooleanField(label='Habilitado', required=False)
 
     class Meta:
         model = Cursos 
@@ -266,3 +267,5 @@ class FormularioNuevoCurso(forms.ModelForm):
         if commit:
             confirmacion.save()
         return confirmacion
+    
+    

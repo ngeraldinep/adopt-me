@@ -14,13 +14,13 @@ urlpatterns = [
     
     # Path de Formularios para usuario NO REGISTRADOS
     path('formulario/cursosycapacitaciones/', views.cursosycapacitaciones, name="cursosycapacitaciones"),
-    path('formulario/visitas/', views.visitas, name="visitas"),
-    path('formulario/lazarillo/', views.lazarillo, name="lazarillo"),
-    path('formulario/adopcion/', views.adoptar, name="adopcion"),
+    path('visitas/', views.visitas, name="visitas"),
+    path('lazarillo/', views.lazarillo, name="lazarillo"),
+    path('adopcion/', views.adoptar, name="adopcion"),
     path('formulario/donacionpago/', views.pago, name="donacionpago"),
     
     # Path de Registro, login y logout
-    path('formulario/signup/', views.signup, name="Signup"),
+    path('signup/', views.signup, name="Signup"),
     path('formulario/signin/', views.signin, name="signin"),
     path('formulario/logout/', views.signout, name="Logout"),
     

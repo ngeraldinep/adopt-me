@@ -42,7 +42,7 @@
 <h2>Disponibilidad de Fechas</h2>
 
 <form method="GET">
-    <label for="estado_filtrar">Filtrar por estado (0=true):</label>
+    <label for="estado_filtrar">Filtrar por estado:</label>
     <select name="estado_filtrar" id="estado_filtrar">
         <option value="1">Habilitada</option>
         <option value="0">Cerrada</option>
@@ -74,12 +74,20 @@
       <td>{{ dato.usuario.username }}</td>
       <td>{{ dato.estado }}</td>
       <td>
+        
+        
+        
         <form method="POST" action="{% url 'change_fechas' dato.id %}">
           {% csrf_token %}
           <button type="submit" class="change-state-button">Cambiar Estado</button>
         </form>
+        
+
       </td>
     </tr>
+
+
+
   {% endfor %}
 </table>
 

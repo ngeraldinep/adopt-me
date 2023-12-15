@@ -144,11 +144,12 @@ def signout(request):
     return redirect('home')
 
 def signup(request):
-    title = 'Signup'
+    title = 'Registrarse'
 
     if request.method == 'GET':
         return render(request, 'log/signup.html', {
-            'form': UserCreationForm
+            'form': UserCreationForm,
+            'title': title
         })
     else:
         if request.POST['password1'] == request.POST['password2']:
@@ -158,22 +159,25 @@ def signup(request):
                     username=request.POST['username'], password=request.POST['password1'])
                 user.save()
                 login(request, user)
-                return redirect('home')
+                return redirect('home_registrados')
             except IntegrityError:
                 return render(request, 'log/signup.html', {
                     'form': UserCreationForm,
+                    'title': title,
                     'error': 'El usuario ya existe'
                 })
         return render(request, 'log/signup.html', {
             'form': UserCreationForm,
+            'title': title,
             'error': 'Las contraseñas no son iguales'
         })
 
 def signin(request):
-    
+    title = 'Ingresar'
     if request.method == 'GET':
         return render(request, 'log/signin.html', {
-            'form' : AuthenticationForm
+            'form' : AuthenticationForm,
+            'title': title
         })
     else:
         user = authenticate(
@@ -181,6 +185,7 @@ def signin(request):
         if user is None:
             return render(request, 'log/signin.html', {
                 'form' : AuthenticationForm,
+                'title': title,
                 'error' : 'Usuario o Contraseña incorrectos!'
             })
         else:

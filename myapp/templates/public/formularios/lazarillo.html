@@ -9,14 +9,54 @@
     <head>
     </head>
     <body>
-        <form method="post" action="/lazarillo/" class="container_formularios" style="float:left  ; margin:2em;" >
-            {% csrf_token %}
+       
+        <h2 style="text-indent: 1em; padding: 80px; margin-top: 30px;"><b>Completa el formulario para adoptar tu perro de compañia.</b></h2>
 
-            <h2 style="text-indent: 1em;"><b>Completa el formulario para solicitar a buscar tu perro de compania.</b></h2>
 
-            {{ form.as_p }}
-            <button type="submit" colspan="2" style="text-align: center;" class="submit-button">Guardar</button>
-        </form>
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <form method="post" action="/lazarillo/" class="card card-body text-center">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="nombre">Nombre:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="nombre" id="nombre" class="form-control" placeholder="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre">Apellido:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="apellido" id="apellido" class="form-control" placeholder="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono">Teléfono:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="telefono" id="telefono" class="form-control" placeholder="Ingrese su teléfono">
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo">E-mail:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="correo" id="correo" class="form-control" placeholder="Ingrese su correo electrónico">
+                    </div>
+                    <div class="mb-3">
+                        <label for="discapacidad">Discapacidad:</label>
+                        <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="discapacidad" id="discapacidad" class="form-control" placeholder="...">
+                    </div>
+                    <div class="mb-3">
+                        <label>
+                            <input type="radio" name="pimeraVez" value="pimeraVez">
+                            Es mi primer lazarillo
+                        </label> 
+                    </div>
+                    <div class="mb-3">
+                        <label for="info">Informacion adicional:</label>
+                        <textarea style="resize: none; justify-content: center; display: flex; text-align: center;" id="info" name="info" rows="4" class="form-control" placeholder="Contanos sobre vos..."></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>        
+
+
     </body>
 
 </html>

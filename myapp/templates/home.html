@@ -45,68 +45,104 @@
               setTimeout(carousel, 4000);    
             }
         </script>        
-        <div class="corte-pagina" style="background-color: #fcf8f3">  
-            <form>
-                <input type="hidden" name="monto_donado" id="monto_donado" value="">
-                <div>
-                    <h3>Dona hoy! salva una vida</h3>
-                </div>
-            
-                <div>
-                    <label for="unavez" class="my-1 mt-0">
-                        <input x-on:click="selected = 'opt1'" id="unavez" type="radio" name="plan" value="donar1" checked>
-                        Donar una vez $2000
-                    </label>
-                    <br>
-            
-                    <label for="mensual" class="my-1">
-                        <input x-on:click="selected = 'opt2'" id="mensual" type="radio" name="plan" value="donarmes">
-                        Donar mensual - <strong>$5000</strong>
-                    </label>
-                    <br>
-            
-                    <label for="anual" class="my-1 mb-0">
-                        <input x-on:click="selected = 'opt3'" id="anual" type="radio" name="plan" value="donaranio">
-                        Donar anualmente - <strong>$60000</strong><span class="text-green-500"></span>
-                    </label>
-                </div>
-            
-                <div style="padding: 2em;">
-                    <button type="button" class="submit-button" onclick="realizarPago()">Donar</button>
-                </div>
-            </form>
-            <script>
-                function realizarPago() {
-                    // Aquí puedes agregar la lógica de pago si es necesario
-                    // ...
-            
-                    // Después de la lógica de pago, redirige a la página de donación de pago
-                    window.location.href = '{% url "donacionpago" %}';
-                }
-            </script>
-            
-            <!-- para que tome el valor -->
-        
-
-        </div>    
+        <main class="container py-5"> 
+            <section class="card card-body" >
+                <form>
+                    <input type="hidden" name="monto_donado" id="monto_donado" value="">
+                    <div style="padding: 20px;">
+                        <h1 class="display-5">Dona hoy! salva una vida</h1>
+                    </div>
+                    
+                    <div style="padding: 10px;">
+                        <label for="unavez" class="my-1 mt-0">
+                            <input x-on:click="selected = 'opt1'" id="unavez" type="radio" name="plan" value="donar1" checked>
+                            Donar una vez $2000
+                        </label>
+                        <br>
+                
+                        <label for="mensual" class="my-1">
+                            <input x-on:click="selected = 'opt2'" id="mensual" type="radio" name="plan" value="donarmes">
+                            Donar mensual - <strong>$5000</strong>
+                        </label>
+                        <br>
+                
+                        <label for="anual" class="my-1 mb-0">
+                            <input x-on:click="selected = 'opt3'" id="anual" type="radio" name="plan" value="donaranio">
+                            Donar anualmente - <strong>$60000</strong><span class="text-green-500"></span>
+                        </label>
+                    </div>
+                
+                    <div style="padding: 2em;">
+                        <button type="button" class="submit-button" onclick="realizarPago()">Donar</button>
+                    </div>
+                </form>
+                <script>
+                    function realizarPago() {
+                        window.location.href = '{% url "donacionpago" %}';
+                    }
+                </script>
+            </section>    
+        </main>    
         <div class="corte-pagina">
-            <div style="padding: 3em " id="contacto-sugerencia">
+            <div  id="contacto-sugerencia">
                 <h3 class="centrar-texto">Contactanos</h3>
                 <hr>
-                <p>Envianos tu pregunta o sugerencia</p>
-    
-                <div class="container_formularios" style="margin:1em;">
-                    <form method="post" style="width: 100px; margin: 0; margin-top: 10px; text-align: center;">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit" style="margin-top: 10px;">Enviar</button>
-                    </form>
-                </div><br>
+                <h5 style="padding: 10px;">Envianos tu consulta o sugerencia</h5>
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <form method="post" class="card card-body text-center">
+                            {{ error }}
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="nombre">Nombre:</label>
+                                <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingrese su nombre">
+                            </div>
+                            <div class="mb-3">
+                                <label for="apellido">Apellido:</label>
+                                <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="apellido" id="apellido" class="form-control" placeholder="Ingrese su apellido">
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefono">Teléfono:</label>
+                                <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="telefono" id="telefono" class="form-control" placeholder="Ingrese su teléfono">
+                            </div>
+                            <div class="mb-3">
+                                <label for="correo">E-mail:</label>
+                                <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="correo" id="correo" class="form-control" placeholder="Ingrese su correo electrónico">
+                            </div>
+                            <div class="mb-3">
+                                <label for="mensaje">Deja tu mensaje:</label>
+                                <textarea style="resize: none; justify-content: center; display: flex; text-align: center;" id="mensaje" name="mensaje" rows="4" class="form-control" placeholder="Escribe tu mensaje aquí"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label>
+                                    <input type="radio" name="categoria" value="sugerencias-reclamos">
+                                    Sugerencias/Reclamos
+                                </label>
+                                <br>
+                                <label>
+                                    <input type="radio" name="categoria" value="consultas">
+                                    Consultas
+                                </label>
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit">
+                                    Enviar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>    
-        <div>
-                <img src="{% static '/home-img/paseo-perros.jpg' %}" style="filter: grayscale(50%); object-fit: cover; width:100%; height:100%;" >
+        <div class="container d-flex align-items-center mt-5 mb-5 mx-auto">
+            <div class="img-container rounded border p-2" style="max-width: 80%; margin-left: 100px;">
+                <img src="{% static '/home-img/paseo-perros.jpg' %}" class="img-fluid" style="filter: grayscale(50%); object-fit: cover; width: 100%; height: auto;" alt="Paseo de perros">
+            </div>
         </div>
+        
+        
+        
+        
     </body>
 </html>
 

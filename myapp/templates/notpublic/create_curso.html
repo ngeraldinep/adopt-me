@@ -1,14 +1,32 @@
 {% extends 'layouts/base.html' %}
 {% block content %}
 
-<h1>Project 1</h1>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">
-        Save
-    </button>
-
-</form>
+<h1 style="margin: 80px;">Creacion de capacitaciones</h1>
+<main class="container" style=" margin-bottom: 90px;">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <form  method="post" class="card card-body text center">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="apellido">Nombre de la capacitacion:</label>
+                    <input style="resize: none; justify-content: center; display: flex; text-align: center;" type="text" name="capacitacion" id="capacitacion" class="form-control" placeholder="...">
+                </div>
+                <div class="mb-3">
+                    <label for="mensaje">Informacion adicional:</label>
+                    <textarea style="resize: none; justify-content: center; display: flex; text-align: center;" id="informacion" name="informacion" rows="2" class="form-control" placeholder="informacion adicional"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label>
+                        <input type="radio" name="habilitado" value="habilitado">
+                        Habilitado
+                    </label>
+                </div>
+                <button type="submit">
+                    Guardar
+                </button>
+            </form>
+        </div>
+    </div>            
+</main> 
 
 {% endblock %}

@@ -9,13 +9,13 @@
     <body>
         {{ error }}
 
-        <div style="justify-content: center; align-items: center; height: auto;">
+        <div style="justify-content: center; align-items: center; height: auto; margin-bottom: 300px;">
             <form method="post" style="width: 300px; margin: 0 auto; margin-top: 100px;">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" style="margin-top: 10px;">Ingresar</button>
             </form>
-            <a  class="btn"href="{% url 'home' %}" style="color: darkgoldenrod;"><i class="fa fa-arrow-circle-up fa-3x"></i></a>
+            
         </div>
     </body>
     
